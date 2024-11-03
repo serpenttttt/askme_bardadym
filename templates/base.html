@@ -1,0 +1,99 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AskBardadym</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid m-2">
+
+        <a class="navbar-brand" href="#">AskBardadym</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">ASK!</button>
+            </form>
+        </div>
+
+
+        {% if user.is_authorized %}
+            <div class="d-flex gap-3">
+                <div class="ratio-1x1 align-content-center">
+                    <img src="../static/img/avatar2.jpg" alt="Avatar" style="max-width: 45px" class="img-fluid">
+                </div>
+
+                <div>
+                    <div>Batman</div>
+                    <div>
+                        <a class="me-2" href="settings.html">Settings</a>
+                        <a class="me-2" href="#">Log Out</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="d-flex">
+                <a class="me-3" href="login.html">Log In</a>
+                <a class="me-3" href="signup.html">Register</a>
+            </div>
+        {% endif %}
+
+
+    </div>
+</nav>
+
+<div class="row m-2">
+
+    {% block title %}{% endblock %}
+
+    <div class="col-9">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div class="col-3">
+
+        <section class="mb-5">
+            <h2>Popular Tags</h2>
+            <div>
+                <span class="badge rounded-pill text-bg-primary"><a href="#"
+                                                                    style="text-decoration: none; color: white">Perl</a></span>
+                <span class="badge rounded-pill text-bg-secondary"><a href="#"
+                                                                      style="text-decoration: none; color: white">Python</a></span>
+                <span class="badge rounded-pill text-bg-success"><a href="#"
+                                                                    style="text-decoration: none; color: white">TechnoPark</a></span>
+                <span class="badge rounded-pill text-bg-danger"><a href="#" style="text-decoration: none; color: white">MySQL</a></span>
+                <span class="badge rounded-pill text-bg-warning"><a href="#"
+                                                                    style="text-decoration: none; color: white">Django</a></span>
+                <span class="badge rounded-pill text-bg-info"><a href="#" style="text-decoration: none; color: white">Mail.Ru</a></span>
+                <span class="badge rounded-pill text-bg-dark"><a href="#" style="text-decoration: none; color: white">Firefox</a></span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Best Members</h2>
+            <div class="list-group">
+                <a href="#" class="mb-2">Mr. Freeman</a>
+                <a href="#" class="mb-2">Dr. House</a>
+                <a href="#" class="mb-2">Bender</a>
+                <a href="#" class="mb-2">Queen Victoria</a>
+                <a href="#" class="mb-2">V. Pupkin</a>
+            </div>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../static/js/bootstrap.js"></script>
+</body>
+</html>

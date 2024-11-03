@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <div class="d-flex gap-5">
+        <h1>Log In</h1>
+    </div>
+{% endblock %} }}
+
+{% block content %}
+
+    <form>
+        <div class="m-1">
+            {% if password.is_wrong %}
+                <div>
+                    <p style="color: red">Sorry, wrong password!</p>
+                </div>
+            {% else %}
+                {% if login.is_wrong %}
+                <div>
+                    <p style="color: red">Sorry, wrong login!</p>
+                </div>
+                {% endif %}
+            {% endif %}
+
+            <div class="mb-3">
+                <label for="login" class="form-label">Login</label>
+                <input type="text" style="max-width: 350px" class="form-control" id="login" placeholder="Enter your login here">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" style="max-width: 350px" class="form-control" id="password" placeholder="*******">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Log In!</button>
+        </div>
+    </form>
+
+    <a href="signup" class="m-1">Create new account</a>
+
+{% endblock %}

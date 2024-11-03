@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <div class="d-flex gap-5">
+        <h1>New Questions</h1>
+        <a class="align-content-center" href="#">Hot Questions</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="d-flex card mb-3">
+        <div class="row m-1">
+            <div class="col-1 align-content-center">
+                <img class="img-fluid" src="{% static 'img/question.jpg' %}" alt="Card Image">
+                <input style="margin-top: 5px" class="form-control" type="number" value="5" aria-label="likes">
+            </div>
+
+            <div class="card-body col-11">
+                <h5 class="card-title"><a href="#">Card Title?</a></h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+
+                <a href="#" class="card-link">Answer (3)</a>
+
+                <div class="d-flex justify-content-end gap-1">
+                    Tags:
+                    <section>
+                        <span class="badge rounded-pill text-bg-primary"><a href="#"
+                                                                            style="text-decoration: none; color: white">Perl</a></span>
+                        <span class="badge rounded-pill text-bg-secondary"><a href="#"
+                                                                              style="text-decoration: none; color: white">Python</a></span>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex card mb-3">
+        <div class="row m-1">
+            <div class="col-1 align-content-center">
+                <img class="img-fluid" src="{% static 'img/question.jpg' %}" alt="Card Image">
+                <input style="margin-top: 5px" class="form-control" type="number" value="5" aria-label="likes">
+            </div>
+
+            <div class="card-body col-11">
+                <h5 class="card-title"><a href="#">Card Title?</a></h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+
+                <a href="#" class="card-link">Answer (3)</a>
+
+                <div class="d-flex justify-content-end gap-1">
+                    Tags:
+                    <section>
+                        <span class="badge rounded-pill text-bg-primary"><a href="#"
+                                                                            style="text-decoration: none; color: white">Perl</a></span>
+                        <span class="badge rounded-pill text-bg-secondary"><a href="#"
+                                                                              style="text-decoration: none; color: white">Python</a></span>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex card mb-3">
+        <div class="row m-1">
+            <div class="col-1 align-content-center">
+                <img class="img-fluid" src="{% static 'img/question.jpg' %}" alt="Card Image">
+                <input style="margin-top: 5px" class="form-control" type="number" value="5" aria-label="likes">
+            </div>
+
+            <div class="card-body col-11">
+                <h5 class="card-title"><a href="#">Card Title?</a></h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+
+                <a href="#" class="card-link">Answer (3)</a>
+
+                <div class="d-flex justify-content-end gap-1">
+                    Tags:
+                    <section>
+                        <span class="badge rounded-pill text-bg-primary"><a href="#"
+                                                                            style="text-decoration: none; color: white">Perl</a></span>
+                        <span class="badge rounded-pill text-bg-secondary"><a href="#"
+                                                                              style="text-decoration: none; color: white">Python</a></span>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="...">
+        <ul class="pagination pagination-sm gap-2">
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">1</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            <li class="page-item"><a class="page-link" href="#">53</a></li>
+        </ul>
+    </nav>
+{% endblock %}

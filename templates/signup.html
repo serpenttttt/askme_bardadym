@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <div class="d-flex gap-5">
+        <h1>Sign Up</h1>
+    </div>
+{% endblock %} }}
+
+{% block content %}
+
+    <form>
+        <div class="m-1">
+            {% if email.is_wrong or email.is_registered %}
+                <div>
+                    <p style="color: red">Sorry, this email is already registered or wrong!</p>
+                </div>
+            {% else %}
+                {% if login.is_wrong %}
+                    <div>
+                        <p style="color: red">Sorry, this login is already taken!</p>
+                    </div>
+                {% endif %}
+            {% endif %}
+
+            <div class="mb-3">
+                <label for="login" class="form-label">Login</label>
+                <input type="text" style="max-width: 350px" class="form-control" id="login" placeholder="dr_pepper">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" style="max-width: 350px" class="form-control" id="email"
+                       placeholder="dr.pepper@mail.ru">
+            </div>
+
+            <div class="mb-3">
+                <label for="nickname" class="form-label">Nickname</label>
+                <input type="text" style="max-width: 350px" class="form-control" id="nickname" placeholder="Dr. Pepper">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" style="max-width: 350px" class="form-control" id="password"
+                       placeholder="*******">
+            </div>
+
+            <div class="mb-3">
+                <label for="repeat_password" class="form-label">Repeat Password</label>
+                <input type="password" style="max-width: 350px" class="form-control" id="repeat_password"
+                       placeholder="*******">
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="file" style="max-width: 350px" class="form-control" id="inputGroupFile02">
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Register!</button>
+        </div>
+    </form>
+
+{% endblock %}
