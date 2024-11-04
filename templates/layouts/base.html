@@ -1,0 +1,93 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AskBardadym</title>
+    <link rel="stylesheet" href="{% static '/css/bootstrap.css' %}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid m-2">
+
+        <a class="navbar-brand" href="{% url 'questions_listing' %}">AskBardadym</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <a style="text-decoration: none; color: darkgreen" class="btn btn-outline-success"
+                   href="{% url 'ask' %}">ASK!</a>
+            </form>
+        </div>
+
+        {% if user.is_authorized %}
+            <div class="d-flex gap-3">
+                <div class="ratio-1x1 align-content-center">
+                    <img src="../../static/img/avatar2.jpg" alt="Avatar" style="max-width: 45px" class="img-fluid">
+                </div>
+
+                <div>
+                    <div>Batman</div>
+                    <div>
+                        <a class="me-2" href="../settings.html">Settings</a>
+                        <a class="me-2" href="#">Log Out</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="d-flex">
+                <a class="me-3" href="{% url 'login' %}">Log In</a>
+                <a class="me-3" href="{% url 'signup' %}">Register</a>
+            </div>
+        {% endif %}
+
+    </div>
+</nav>
+
+<div class="row m-2">
+
+    {% block title %}{% endblock %}
+
+    <div class="col-9">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div class="col-3">
+        <section class="mb-5">
+            <h2>Popular Tags</h2>
+            <div>
+                {% for tag in tags %}
+                    <span class="badge rounded-pill text-bg-primary"><a href="{% url 'tag_questions' tag=tag.tag %}"
+                                                                        style="text-decoration: none; color: white">{{ tag.tag }}</a></span>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section>
+            <h2>Best Members</h2>
+            <div class="list-group">
+                {% for member in best_members %}
+                    <a href="#" class="mb-2">{{ member }}</a>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<footer class="d-flex justify-content-center py-3 my-4 border-top">
+    <div class="d-flex align-items-center">
+        <span class="mb-3 mb-md-0 text-muted">© 2024, AskBardadym</span>
+    </div>
+</footer>
+
+<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

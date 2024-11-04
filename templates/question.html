@@ -1,13 +1,5 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
 {% load static %}
-
-{% if tag.is_chosen %}
-    {% block title %}
-        <div class="d-flex gap-5">
-            <h1>Tag</h1>
-        </div>
-    {% endblock %}
-{% endif %}
 
 {% block content %}
     <div class="d-flex mb-3">
@@ -18,18 +10,16 @@
             </div>
 
             <div class="card-body col-11">
-                <h5 class="card-title">Card Title?</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias aliquid aut
-                    doloremque ducimus iure laudantium porro, repellendus? Debitis dolorum natus nostrum possimus
-                    voluptatem? Delectus dolorem fuga impedit obcaecati soluta.</p>
+                <h5 class="card-title">{{ question.title }}</h5>
+                <p class="card-text">{{ question.text }}</p>
 
                 <div class="d-flex justify-content-start gap-1">
                     Tags:
                     <section>
-                        <span class="badge rounded-pill text-bg-primary"><a href="#"
-                                                                            style="text-decoration: none; color: white">Perl</a></span>
-                        <span class="badge rounded-pill text-bg-secondary"><a href="#"
-                                                                              style="text-decoration: none; color: white">Python</a></span>
+                        {% for tag in question.tags %}
+                            <span class="badge rounded-pill text-bg-primary"><a href="{% url 'tag_questions' tag %}"
+                                                                                style="text-decoration: none; color: white">{{ tag }}</a></span>
+                        {% endfor %}
                     </section>
                 </div>
             </div>
@@ -38,57 +28,29 @@
 
     <hr class="my-4">
 
-    <div class="d-flex card mb-3">
-        <div class="row m-1">
-            <div class="col-1 align-content-center my-2">
-                <img class="img-fluid" src="{% static 'img/avatar2.jpg' %}" alt="Card Image">
-                <input style="margin-top: 5px" class="form-control" type="number" value="5" aria-label="likes">
-            </div>
+    {% for answer in answers %}
+        <div class="d-flex card mb-3">
+            <div class="row m-1">
+                
+                <div class="col-1 align-content-center my-2">
+                    <img class="img-fluid" src="{% static 'img/avatar2.jpg' %}" alt="Card Image">
+                    <input style="margin-top: 5px" class="form-control" type="number" value="{{ answer.answer_rating }}"
+                           aria-label="likes">
+                </div>
 
-            <div class="card-body col-11">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+                <div class="card-body col-11">
+                    <p class="card-text">{{ answer.answer_text }}</p>
 
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="checkbox">
-                    <label class="form-check-label" for="checkbox">Correct!</label>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkbox">
+                        <label class="form-check-label" for="checkbox">Correct!</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endfor %}
 
-    <div class="d-flex card mb-3">
-        <div class="row m-1">
-            <div class="col-1 align-content-center my-2">
-                <img class="img-fluid" src="{% static 'img/avatar.jpg' %}" alt="Card Image">
-                <input style="margin-top: 5px" class="form-control" type="number" value="5" aria-label="likes">
-            </div>
-
-            <div class="card-body col-11">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="checkbox1">
-                    <label class="form-check-label" for="checkbox1">Correct!</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav aria-label="...">
-        <ul class="pagination pagination-sm gap-2">
-            <li class="page-item active" aria-current="page">
-                <span class="page-link">1</span>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">...</a></li>
-            <li class="page-item"><a class="page-link" href="#">53</a></li>
-        </ul>
-    </nav>
+    {% include 'layouts/pagination.html' %}
 
     <hr class="my-4">
 

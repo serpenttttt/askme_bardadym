@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "layouts/base.html" %}
 {% load static %}
 
 {% block title %}
@@ -37,6 +37,6 @@
         </div>
     </form>
 
-    <a href="signup" class="m-1">Create new account</a>
+    <a href="{% url 'signup' %}" class="m-1">Create new account</a>
 
 {% endblock %}
