@@ -1,32 +1,34 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
 
-questions = []
-for i in range(140):
-    questions.append({
-        'title': 'title ' + str(i),
-        'id': i,
-        'text': 'text ' + str(i),
-        'tags': ['tag ' + str(i)],
-        'answers': [{
-            'answer_text': 'answer ' + str(i),
-            'answer_rating': i
-        } for _ in range(150)]
-    })
+from app.models import *
 
-tags = []
-for i in range(1, 30):
-    tags.append({
-        'tag': ('tag ' + str(i))
-    })
+# questions = []
+# for i in range(140):
+#     questions.append({
+#         'title': 'title ' + str(i),
+#         'id': i,
+#         'text': 'text ' + str(i),
+#         'tags': ['tag ' + str(i)],
+#         'answers': [{
+#             'answer_text': 'answer ' + str(i),
+#             'answer_rating': i
+#         } for _ in range(150)]
+#     })
+#
+# tags = []
+# for i in range(1, 30):
+#     tags.append({
+#         'tag': ('tag ' + str(i))
+#     })
 
-best_members = [
-    "Mr. Freeman",
-    "Dr. House",
-    "Bender",
-    "Queen Victoria",
-    "V. Pupkin"
-]
+# best_members = [
+#     "Mr. Freeman",
+#     "Dr. House",
+#     "Bender",
+#     "Queen Victoria",
+#     "V. Pupkin"
+# ]
 
 
 def paginate(object_list, request, per_page):
@@ -37,7 +39,10 @@ def paginate(object_list, request, per_page):
 
 # Create your views here.
 def questions_listing(request):
+    questions = Question.objects.get_new_questions()
+    tags = Tag.objects.get_tags()
     page = paginate(questions, request, per_page=20)
+    best_members = Profile.objects.get_best_members()
     return render(request, "index.html",
                   context={"questions": page.object_list, 'page_obj': page, "tags": tags, "best_members": best_members})
 

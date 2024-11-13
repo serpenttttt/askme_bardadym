@@ -64,8 +64,8 @@
             <h2>Popular Tags</h2>
             <div>
                 {% for tag in tags %}
-                    <span class="badge rounded-pill text-bg-primary"><a href="{% url 'tag_questions' tag=tag.tag %}"
-                                                                        style="text-decoration: none; color: white">{{ tag.tag }}</a></span>
+                    <span class="badge rounded-pill text-bg-primary"><a href="{% url 'tag_questions' tag=tag.name %}"
+                                                                        style="text-decoration: none; color: white">{{ tag.name }}</a></span>
                 {% endfor %}
             </div>
         </section>
@@ -74,7 +74,7 @@
             <h2>Best Members</h2>
             <div class="list-group">
                 {% for member in best_members %}
-                    <a href="#" class="mb-2">{{ member }}</a>
+                    <a href="#" class="mb-2">{{ member.nickname }}</a>
                 {% endfor %}
             </div>
         </section>

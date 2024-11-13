@@ -41,8 +41,8 @@
                         <section>
                             {% for tag in question.tags %}
                                 <span class="badge rounded-pill text-bg-primary"><a
-                                        href="{% url 'tag_questions' tag=tag %}"
-                                        style="text-decoration: none; color: white">{{ tag }}</a></span>
+                                        href="{% url 'tag_questions' tag=tag.name %}"
+                                        style="text-decoration: none; color: white">{{ tag.name }}</a></span>
                             {% endfor %}
                         </section>
                     </div>
