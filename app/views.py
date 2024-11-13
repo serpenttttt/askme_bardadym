@@ -3,33 +3,6 @@ from django.shortcuts import render
 
 from app.models import *
 
-# questions = []
-# for i in range(140):
-#     questions.append({
-#         'title': 'title ' + str(i),
-#         'id': i,
-#         'text': 'text ' + str(i),
-#         'tags': ['tag ' + str(i)],
-#         'answers': [{
-#             'answer_text': 'answer ' + str(i),
-#             'answer_rating': i
-#         } for _ in range(150)]
-#     })
-#
-# tags = []
-# for i in range(1, 30):
-#     tags.append({
-#         'tag': ('tag ' + str(i))
-#     })
-
-# best_members = [
-#     "Mr. Freeman",
-#     "Dr. House",
-#     "Bender",
-#     "Queen Victoria",
-#     "V. Pupkin"
-# ]
-
 
 def paginate(object_list, request, per_page):
     page_num = int(request.GET.get('page', 1))
@@ -41,50 +14,70 @@ def paginate(object_list, request, per_page):
 def questions_listing(request):
     questions = Question.objects.get_new_questions()
     tags = Tag.objects.get_tags()
-    page = paginate(questions, request, per_page=20)
     best_members = Profile.objects.get_best_members()
+    page = paginate(list(questions), request, per_page=20)
+
     return render(request, "index.html",
                   context={"questions": page.object_list, 'page_obj': page, "tags": tags, "best_members": best_members})
 
 
 def hot_questions(request, is_hot):
+    tags = Tag.objects.get_tags()
+    best_members = Profile.objects.get_best_members()
     if is_hot == "hot":
+        questions = Question.objects.get_hot_questions()
         return render(request, "index.html",
-                  context={"hot": is_hot, "questions": questions, "tags": tags, "best_members": best_members})
+                      context={"hot": is_hot, "questions": questions, "tags": tags, "best_members": best_members})
     else:
         return render(request, "404.html", status=404, context={"tags": tags, "best_members": best_members})
 
 
 def tag_questions(request, tag):
-    questions_tag = []
-    for question in questions:
-        for question_tag in question['tags']:
-            if question_tag == tag:
-                questions_tag.append(question)
-    page = paginate(questions_tag, request, per_page=20)
+    tags = Tag.objects.get_tags()
+    best_members = Profile.objects.get_best_members()
+    questions_tag = Question.objects.get_questions_with_tag(tag)
+    page = paginate(list(questions_tag), request, per_page=20)
+
     return render(request, "index.html",
-                  context={"tag": tag, "questions": page.object_list, 'page_obj': page, "tags": tags, "best_members": best_members})
+                  context={"tag": tag, "questions": page.object_list, 'page_obj': page, "tags": tags,
+                           "best_members": best_members})
 
 
 def question(request, id):
-    card_question = questions[id]
-    page = paginate(card_question['answers'], request, per_page=30)
+    tags = Tag.objects.get_tags()
+    best_members = Profile.objects.get_best_members()
+    card_question = Question.objects.get(id=id)
+    answers = Answer.objects.get_answers_by_question_id(id)
+    page = paginate(list(answers), request, per_page=30)
+
     return render(request, "question.html",
                   context={"question": card_question, "answers": page.object_list, 'page_obj': page, "tags": tags,
                            "best_members": best_members})
 
 
 def new_question(request):
+    tags = Tag.objects.get_tags()
+    best_members = Profile.objects.get_best_members()
+
     return render(request, "ask.html", context={"tags": tags, "best_members": best_members})
 
 
 def login(request):
+    tags = Tag.objects.get_tags()
+    best_members = Profile.objects.get_best_members()
+
     return render(request, "login.html", context={"tags": tags, "best_members": best_members})
 
 
 def signup(request):
+    tags = Tag.objects.get_tags()
+    best_members = Profile.objects.get_best_members()
+
     return render(request, "signup.html", context={"tags": tags, "best_members": best_members})
 
 
 def settings(request):
-    return render(request, "settings.html")
+    tags = Tag.objects.get_tags()
+    best_members = Profile.objects.get_best_members()
+
+    return render(request, "settings.html", context={"tags": tags, "best_members": best_members})
